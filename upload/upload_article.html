@@ -1,0 +1,79 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<script src="../js/jquery-1.7.1.min.js" type="text/javascript"></script>
+<script src="../ckeditor/ckeditor.js" type="text/javascript"></script>
+<script src="../js/ajaxupload.js" type="text/javascript"></script>
+<script type="text/javascript">
+$(function() {
+	CKEDITOR.replace('document_body');
+	
+	var btnUpload=$('#upload');  
+	var status=$('#status');  
+	new AjaxUpload(btnUpload, {  
+			action: 'upload_pic.php',  
+			//Name of the file input box  
+			name: 'upload_pic',  
+			onSubmit: function(file, ext){  
+					if (! (ext && /^(jpg|png|jpeg|gif)$/.test(ext))){  
+								// check for valid file extension  
+							status.text('Only JPG, PNG or GIF files are allowed');  
+							return false;  
+					}  
+					status.text('Uploading...');  
+			},  
+			onComplete: function(file, response){  
+					//On completion clear the status  
+					status.text('');  
+					//Add uploaded file to list  
+					console.log(response.replace(/ /g,''));
+					if(response.replace(/ /g,'')=="success"){  
+							$('<li></li>').appendTo('#files').html('<img src="/uploaded/'+file+'" alt="" /><br />'+file).addClass('success');  
+					} else{  
+							$('<li></li>').appendTo('#files').text(file).addClass('error');  
+					}  
+			}  
+	});  
+});
+
+/*function add_more_pic($this) {
+	$("<form class='upload_pic' method='post' enctype='multipart/form-data' action='upload_pic.php'>		<input onclick='upload_pic($(this))' type='file' name='picture' /><input name='submit' type='submit'  /><br /></form>").insertBefore($this);
+}*/
+</script>
+<style>
+#upload{  
+    margin:30px 200px; padding:15px;  
+    font-weight:bold; font-size:1.3em;  
+    font-family:Arial, Helvetica, sans-serif;  
+    text-align:center;  
+    background:#f2f2f2;  
+    color:#3366cc;  
+    border:1px solid #ccc;  
+    width:150px;  
+    cursor:pointer !important;  
+    -moz-border-radius:5px; -webkit-border-radius:5px;  
+}  
+#upload_article h4 {
+	margin: 5px 0 5px;
+}
+#upload_article input {
+	margin: 5px 0 5px;
+}
+</style>
+<title>Upload Articles</title>
+</head>
+<body>
+<form id="upload_article" method="post" enctype="multipart/form-data" action="auto_script.php">
+    <label><h4>Title: </h4><input name="title" id="title" type="text" /></label><br />
+    <label><h4>Author: </h4><input name="arthor" id="author" type="text"/></label><br />
+    <label><h4>Profile Picture: </h4><input name="profile_pic" type="file" /></label><br />
+    <textarea id="document_body" name="test"></textarea><br />
+    <input type="submit" name="submit" value="Upload" /><br />
+</form>
+<!-- Upload Button-->  
+<div id="upload" >Upload File</div><span id="status" ></span>  
+<!--List Files-->  
+<ul id="files" ></ul>
+</body>
+</html>

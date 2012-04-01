@@ -1,0 +1,4 @@
+
+(gedit:14200): Gtk-WARNING **: Unknown property: GtkGrid.n-rows
+
+(gedit:14200): Gtk-WARNING **: Unknown property: GtkGrid.n-columns
