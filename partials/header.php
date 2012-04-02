@@ -52,7 +52,6 @@
 <script type="text/javascript" src="js/droid_sans_400-droid_sans_700.font.js"></script>
 <script type="text/javascript" src="js/jquery-1.6.min.js"></script>
 <script type="text/javascript" src="js/script.js"></script>
-<script type="text/javascript" src="js/dropdown_menu.js"></script>
 <link rel="icon" type="image/png" href="http://bearandbull.uwaterloo.ca/favicon.ico" />
 <?php 
 	if ($current_page == 'home') {
