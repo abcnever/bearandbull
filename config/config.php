@@ -7,6 +7,6 @@
   
   $db_serverName = "127.0.0.1";
   $db_userName = "bearandbull";
-  $db_password = "vH9PbVDbCHKFd31BbpXc";
+  $db_password = "";
   $db_databaseName = "bearandbull";
 ?>
